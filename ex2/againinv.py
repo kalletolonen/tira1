@@ -9,7 +9,7 @@ def create(n, k):
     
     number_list = list(range(1, n + 1))
     if k >= n:
-        k = n - 1
+        k = n
 
     for i in range(n - 1):
         if k >= n - i:

@@ -10,25 +10,32 @@
 from collections import defaultdict
 
 def count(s, k):
-    dp = defaultdict(int)
+    x = 0
+    y = 0
+    visited = {(0, 0)}
 
-    # Lähtöasetelma
-    dp[(0, 0)] = 1
+    for move in s:
+        if move == "U":
+            y += 1
+        elif move == "D":
+            y -= 1
+        elif move == "L":
+            x -= 1
+        elif move == "R":
+            x += 1
 
-    # Siirrot
-    for i in range(1, k + 1):
-        for move in s:
-            if move == "U":
-                dp[(0, i)] += dp[(0, i - 1)]
-            if move == "D":
-                dp[(0, i)] += dp[(0, i + 1)]
-            if move == "L":
-                dp[(i, 0)] += dp[(i - 1, 0)]
-            if move == "R":
-                dp[(i, 0)] += dp[(i + 1, 0)]
+        visited.add((x, y))
 
-    # Saapumispiste
-    return dp[(k, 0)]
+    unique_positions = len(visited)
+
+    if unique_positions == 1:
+        # Special case: Robot stays in the same place
+        return 1
+
+    # Calculate the number of distinct cells in k repetitions
+    total_cells = unique_positions + (unique_positions - 1) * (k - 1)
+
+    return total_cells
     
 def main():
     print(count("UR", 100))  # 201

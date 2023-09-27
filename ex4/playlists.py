@@ -6,7 +6,18 @@
 #Toteuta tiedostoon playlists.py funktio count, joka laskee osien määrän.
 
 def count(t):
-    # TODO
+    song_index = {}
+    count = 0
+    start_index = 0
+
+    for i, song in enumerate(t):
+        if song in song_index and song_index[song] >= start_index:
+            start_index = song_index[song] + 1
+
+        song_index[song] = i
+        count += i - start_index + 1
+
+    return count
 
 def main():
     print(count([1,2,3,4])) # 10
@@ -15,3 +26,4 @@ def main():
     print(count([1,3,2,3,4,2,4,1,2,1])) # 24
 
 if __name__ == "__main__":
+    main()

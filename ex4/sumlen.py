@@ -7,19 +7,24 @@
 #Toteuta tiedostoon sumlen.py funktio count, joka ilmoittaa osalistojen määrän.
 
 def count(t):
-    prefix_sum = 0
-    count_dict = {0: 1}
-    result = 0
+    total = 0
+    sublist_sums = set()
+    count = 0
 
     for num in t:
-        prefix_sum += num
-        if prefix_sum in count_dict:
-            result += count_dict[prefix_sum]
-            count_dict[prefix_sum] += 1
-        else:
-            count_dict[prefix_sum] = 1
+        total += num
 
-    return result
+        if total == 0:
+            count += 1
+
+        if total in sublist_sums:
+            sublist_sums.clear()
+            total = num
+
+        sublist_sums.add(total)
+
+    return count
+
 def main():
     print(count([1,1,1,1,1])) # 15
     print(count([3])) # 0

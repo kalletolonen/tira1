@@ -13,19 +13,23 @@
 
 class TrackRepeat:
     def __init__(self):
-        self.tracks = []
+        self.track_dictionary = {}
  
     def add(self, x, k):
-        for item in range(0,k+1):
-            self.tracks.append(x)
+        if x in self.track_dictionary:
+            self.track_dictionary[x] += k
+        else:
+            self.track_dictionary[x] = k
  
     def check(self):
-        if len(self.tracks) == 0:
+        if len(self.track_dictionary) == 0:
             return True
-        print(self.tracks)        
-        #print("list of values: ", test_val)
-        #return test_val.count(test_val[0]) == len(test_val)
-
+        
+        frequencies = list(self.track_dictionary.values())
+        unique_frequencies = set(frequencies)
+ 
+        return len(frequencies) == len(unique_frequencies)
+    
 def main():
     t = TrackRepeat()
     print(t.check()) # True
@@ -39,6 +43,6 @@ def main():
     print(t.check()) # True
     t.add(3, 4)
     print(t.check()) # False
-
+ 
 if __name__ == "__main__":
     main()

@@ -15,9 +15,9 @@ def count(r):
     start = end = None
     for i in range(len(r)):
         for j in range(len(r[0])):
-            if r[i][j] == 'A':
+            if r[i][j] == 'B':
                 start = (i, j)
-            elif r[i][j] == 'B':
+            elif r[i][j] == 'Y':
                 end = (i, j)
 
     # Moves to use
@@ -43,12 +43,13 @@ def count(r):
 
 def main():
     r = ["########",
-         "#.A....#",
-         "#.#.##.#",
-         "#.##...#",
-         "#...B#.#",
+         "#......#",
+         "#.#.Y#.#",
+         "#.#B.#.#",
+         "#..X.#.#",
+         "#.#..#.#",
          "########"]
-    print(count(r)) # 7
+    print(count(r)) # 18
 
 if __name__ == "__main__":
     main()
